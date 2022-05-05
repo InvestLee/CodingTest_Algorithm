@@ -1,0 +1,15 @@
+def solution(board, moves):
+    baguni = [] #바구니
+    result = 0
+    for i in moves: #작동 위치
+        for j in range(len(board)): #인형뽑기 통에서 인형을 빼서 바구니에 넣는다.
+            if board[j][i-1] != 0:
+                baguni.append(board[j][i-1])
+                board[j][i-1] = 0
+                if len(baguni) > 1: #바구니에 인형 2개이상 있을때 비교
+                    if baguni[-1] == baguni[-2]:
+                        baguni.pop()
+                        baguni.pop()
+                        result += 2
+                break #인형 하나 빼면 다음 작동 위치를 수행하기 위함
+    return result
