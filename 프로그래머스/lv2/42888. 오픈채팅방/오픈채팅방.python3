@@ -1,0 +1,15 @@
+#딕셔너리를 쓰지않고는 시간초과 문제를 해결할 수 없다고 판단
+
+def solution(record):
+    arr = [record[i].split() for i in range(len(record))]
+    result = []
+    dic = {} #키:id(고유값), Value:닉네임(변경가능)
+    for i in arr:
+        if len(i) == 3: #닉네임까지 있으면
+            dic[i[1]] = i[2] #키 Value 대입
+    for i in arr:
+        if i[0] == 'Enter':
+            result.append('%s님이 들어왔습니다.'%dic[i[1]])
+        elif i[0] == 'Leave':
+            result.append('%s님이 나갔습니다.'%dic[i[1]])
+    return result
