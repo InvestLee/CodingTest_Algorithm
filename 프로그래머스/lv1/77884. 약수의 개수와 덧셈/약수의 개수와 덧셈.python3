@@ -1,0 +1,9 @@
+#약수의 개수가 홀수인 경우는 약수의 제곱이 성립되는 경우 밖에 없다.
+
+def solution(left, right):
+    num = [i for i in range(left,right+1)]
+    for i in range(len(num)):
+        for j in range(1,int((num[i])**(1/2))+1): #약수는 제곱되는 수를 기준으로 양옆의 갯수가 같다.
+            if num[i]%j == 0 and num[i]==j*j:
+                num[i] = -num[i]
+    return sum(num)
