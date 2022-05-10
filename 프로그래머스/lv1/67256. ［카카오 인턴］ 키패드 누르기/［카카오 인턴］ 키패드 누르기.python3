@@ -1,0 +1,27 @@
+def solution(numbers, hand):
+    keypad = [[1,4,7],[2,5,8,0],[3,6,9]]
+    result = ''
+    hands = [[0,3],[2,3]]
+    for i in numbers:
+        if i in keypad[0] : 
+            result += "L"
+            hands[0] = [0,keypad[0].index(i)]
+        elif i in keypad[2] : 
+            result += "R"
+            hands[1] = [2,keypad[2].index(i)]
+        else: 
+            L_distance = abs(1-hands[0][0])+abs(keypad[1].index(i)-hands[0][1])
+            R_distance = abs(1-hands[1][0])+abs(keypad[1].index(i)-hands[1][1])
+            if L_distance < R_distance:
+                result += "L"
+                hands[0] = [1,keypad[1].index(i)]
+            elif L_distance > R_distance:
+                result += "R"
+                hands[1] = [1,keypad[1].index(i)]
+            elif hand == "left":
+                result += "L"
+                hands[0] = [1,keypad[1].index(i)]
+            else:
+                result += "R"
+                hands[1] = [1,keypad[1].index(i)]     
+    return result
