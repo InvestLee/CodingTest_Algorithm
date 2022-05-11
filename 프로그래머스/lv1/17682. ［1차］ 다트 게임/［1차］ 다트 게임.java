@@ -14,8 +14,8 @@ class Solution {
                 }
                 temp = "";
                 if (dartResult.charAt(i) == 'S') continue;
-                else if (dartResult.charAt(i) == 'D') cal[count-1] = cal[count-1] * cal[count-1];
-                else if (dartResult.charAt(i) == 'T') cal[count-1] = cal[count-1] * cal[count-1] * cal[count-1];
+                else if (dartResult.charAt(i) == 'D') cal[count-1] = (int)Math.pow(cal[count-1],2);
+                else if (dartResult.charAt(i) == 'T') cal[count-1] = (int)Math.pow(cal[count-1],3);
                 else if (dartResult.charAt(i) == '#') cal[count-1] *= -1;
                 else{
                     if (count == 1) cal[count-1] *= 2;
