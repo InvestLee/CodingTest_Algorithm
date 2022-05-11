@@ -1,0 +1,9 @@
+def solution(arr):
+    equal = []
+    for i in range(0,len(arr)-1):
+        if arr[i]!=arr[i+1]: equal.append(i)
+    equal.append(len(arr)-1)
+    result = []
+    for i in equal:
+        result.append(arr[i])
+    return result
