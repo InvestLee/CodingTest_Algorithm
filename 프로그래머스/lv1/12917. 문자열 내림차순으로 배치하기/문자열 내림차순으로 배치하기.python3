@@ -1,0 +1,6 @@
+def solution(s):
+    result=[]
+    for i in s: result.append(ord(i))
+    result.sort(reverse=True)
+    for i in range(len(result)): result[i] = chr(result[i])
+    return ''.join(result)
