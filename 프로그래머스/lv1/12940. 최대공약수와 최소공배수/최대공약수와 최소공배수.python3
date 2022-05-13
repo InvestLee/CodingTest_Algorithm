@@ -1,0 +1,11 @@
+def solution(n, m):
+    result = []
+    if n > m: big, small = n, m
+    else: big, small = m, n
+    while True:
+        big, small = small, big%small
+        if small == 0:
+            result.append(big)
+            result.append(n*m//big)
+            break
+    return result
