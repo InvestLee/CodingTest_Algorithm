@@ -1,0 +1,9 @@
+def solution(s):
+    strin = s.split(' ')
+    result = ''
+    for i in range(len(strin)):
+        for j in range(len(strin[i])):
+            if j%2==0: result+=strin[i][j].upper()
+            else: result+=strin[i][j].lower()
+        if i != len(strin)-1:result+=' '
+    return result
