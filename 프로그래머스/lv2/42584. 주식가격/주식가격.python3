@@ -1,0 +1,14 @@
+from collections import deque
+
+def solution(prices):
+    answer = []
+    count = 0
+    queue = deque(prices)
+    while queue:
+        x = queue.popleft()
+        for i in queue:
+            count+=1
+            if x > i : break
+        answer.append(count)
+        count = 0
+    return answer
