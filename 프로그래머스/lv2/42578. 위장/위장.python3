@@ -1,0 +1,10 @@
+def solution(clothes):
+    arr = [i[1] for i in clothes]
+    arr_set = list(set(arr))
+    product = []
+    for i in arr_set:
+        product.append(arr.count(i)+1)
+    result = 1
+    for i in product:
+        result *= i
+    return result - 1
