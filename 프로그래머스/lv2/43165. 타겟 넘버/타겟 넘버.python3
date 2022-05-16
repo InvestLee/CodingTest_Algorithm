@@ -1,0 +1,15 @@
+from collections import deque
+
+def solution(numbers, target):
+    result = 0
+    queue = deque([(0,0)])
+    while queue:
+        value, order = queue.popleft()
+        if order == len(numbers):
+            if value == target:
+                result += 1
+            continue
+        else:
+            queue.append((value + numbers[order], order+1))
+            queue.append((value - numbers[order], order+1))
+    return result
