@@ -6,6 +6,7 @@ def solution(name):
         nex = i+1
         while nex<len(name) and name[nex] == 'A':
             nex+=1
+        #가장 연속하는 A의 영역을 지나지 않는다.
         #기존 최소 이동수, i만큼 갔다가 돌아오면 2i에 반대쪽으로 가는 수 len(name)-nex,
         #반대방향(len(name)-nex)만큰 갔다가 돌아오면 2(len(name)-nex), 정방향으로 가는 수 i
         min_move = min(min_move, 2*i+len(name)-nex, i+2*(len(name)-nex))
