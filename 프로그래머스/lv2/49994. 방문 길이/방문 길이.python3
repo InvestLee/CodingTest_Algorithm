@@ -1,0 +1,17 @@
+def solution(dirs):
+    
+    x, y = 0,0
+    
+    #HashMap을 통한 방향 지정
+    #오고 가는 길을 모두 HashSet에 등록해서 나누기 2한 값이 정답
+    dict = {"U":[0,1],"D":[0,-1],"L":[-1,0],"R":[1,0]}
+    result = set()
+    for i in dirs:
+        dx, dy = dict[i]
+        nx, ny = x+dx, y+dy
+        if nx >= -5 and nx <= 5 and ny >= -5 and ny <= 5:
+            result.add((x, y, nx, ny))
+            result.add((nx, ny, x, y))
+            x,y = nx, ny
+        
+    return len(result)//2
