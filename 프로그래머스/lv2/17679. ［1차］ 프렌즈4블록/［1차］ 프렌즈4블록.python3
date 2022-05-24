@@ -1,0 +1,26 @@
+def solution(m, n, board):
+    count = 0 #지워진 수 카운팅
+    b = list(map(list, zip(*board))) #블록 삭제하기 용이하게 옆으로 돌리기
+    def process():
+        delete_xy = set()
+        for i in range(1,n):
+            for j in range(1,m):
+                #빈칸이 아니면서 4개가 붙어있는 경우 좌표 넣기
+                if b[i][j] == b[i-1][j] == b[i][j-1] == b[i-1][j-1] != "_":
+                    delete_xy |= set([(i,j),(i-1,j),(i,j-1),(i-1,j-1)])
+        #지워지는 좌표에 0 대입
+        for i, j in delete_xy:
+            b[i][j] = 0
+        #빈공간 채우기
+        for i, row in enumerate(b):
+            empty = ["_"] * row.count(0)
+            b[i] = empty+[k for k in row if k != 0]
+        #지워진 갯수 리턴
+        return len(delete_xy)
+
+    while True:
+        delete = process()
+        #지워진게 없으면 끝
+        if delete == 0: 
+            return count
+        count += delete
