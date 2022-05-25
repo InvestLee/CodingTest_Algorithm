@@ -1,0 +1,15 @@
+# 가로 >= 세로
+# 2*가로+2*세로-4=갈색
+# (가로-2)*(세로-2)=노랑
+# 가로*세로 = 갈색+노랑
+
+def solution(brown, yellow):
+    answer = [0,0]
+    total = brown+yellow
+    for sero in range(3,total):
+        garo = total//sero
+        if 2*garo+2*sero-4==brown and (garo-2)*(sero-2)==yellow:
+            answer = [garo,sero]
+            break
+        
+    return answer
