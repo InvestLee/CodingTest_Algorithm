@@ -1,18 +1,21 @@
-from itertools import permutations
-def solution(k, dungeons):
-    quantity = [i for i in range(len(dungeons))] #던전 순서 0 1 2....
-    for i in range(len(dungeons),0,-1): #역수로 한 이유는 다 탐험할 수 있으면 바로 break
-        for order in permutations(quantity,i): #던전 도는 모든 순서
-            tired = k #현재 피로도
-            check = True #False로 안바뀌면 던전을 모두 돌았음
-            for o in order:
-                if tired < dungeons[o][0]:
-                    check = False
-                    break
-                else:
-                    tired -= dungeons[o][1]
-            if check:
-                return i
-            
-            
+answer = 0
+N = 0
+visited = []
 
+
+def dfs(k,count,dungeons):
+    global answer
+    if answer < count:
+        answer = count
+    for i in range(N):
+        if k >= dungeons[i][0] and not visited[i]:
+            visited[i] = 1
+            dfs(k-dungeons[i][1],count+1,dungeons)
+            visited[i] = 0
+            
+def solution(k, dungeons):
+    global N, visited
+    N = len(dungeons)
+    visited = [0] * N
+    dfs(k, 0, dungeons)
+    return answer
