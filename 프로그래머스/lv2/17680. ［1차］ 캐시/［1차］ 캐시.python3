@@ -1,0 +1,17 @@
+from collections import deque
+
+def solution(cacheSize, cities):
+    answer = 0
+    queue = deque([])
+    for c in cities:
+        if c.lower() in queue:
+            queue.remove(c.lower())
+            queue.append(c.lower())
+            answer += 1
+            continue
+        queue.append(c.lower())
+        if len(queue) > cacheSize:
+            queue.popleft()
+        answer += 5
+    
+    return answer
