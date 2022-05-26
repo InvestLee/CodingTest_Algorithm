@@ -1,0 +1,45 @@
+from itertools import permutations
+
+#백트래킹 사용
+#['100-200*300-500', '20'] => +20 분리
+#['100', '200*300', '500'] => 100-, -500 분리
+#['200', '300'] 숫자만 남음
+#200*300 = 60000
+#100-60000-500=-60400
+#-60400+20=-60380
+
+def cal(op,count,exp):
+    if exp.isdigit():
+        return str(exp)
+    if op[count]=='+':
+        split_exp = exp.split('+')
+        print(split_exp)
+        temp = []
+        for e in split_exp:
+            temp.append(cal(op,count+1,e))
+        print(str(eval("+".join(temp))))
+        return str(eval("+".join(temp)))
+    if op[count]=='-':
+        split_exp = exp.split('-')
+        print(split_exp)
+        temp = []
+        for e in split_exp:
+            temp.append(cal(op,count+1,e))
+        print(str(eval("-".join(temp))))
+        return str(eval("-".join(temp)))
+    if op[count]=='*':
+        split_exp = exp.split('*')
+        print(split_exp)
+        temp = []
+        for e in split_exp:
+            temp.append(cal(op,count+1,e))
+        print(str(eval("*".join(temp))))
+        return str(eval("*".join(temp)))
+
+def solution(expression):
+    result = 0
+    oper = list(permutations(['+','-','*'],3)) #모든 연산 경우의 수 지정
+    for o in oper:
+        temp = abs(int(cal(o,0,expression)))
+        result = max(temp, result)
+    return result
