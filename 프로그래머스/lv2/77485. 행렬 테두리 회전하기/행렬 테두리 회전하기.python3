@@ -1,0 +1,25 @@
+def solution(rows, columns, queries):
+    arr = [] #행렬에 따라 순차적인 테이블 생성
+    for i in range(rows):
+        arr.append([j for j in range(columns*i+1,columns*(i+1)+1)])
+    
+    result = [] #회전한 수 중 최솟값을 담기 위함
+    for q in queries:
+        q = [n -1 for n in q] #쿼리의 좌표를 프로그래밍에 맞게 변경
+        temp = arr[q[0]][q[1]] #덮어질 임시값 설정
+        min_num = temp #최소값 비교
+        for i in range(q[0],q[2]): #좌측 세로열
+            arr[i][q[1]] = arr[i+1][q[1]]
+            min_num = min(min_num, arr[i][q[1]])
+        for i in range(q[1],q[3]): #하단 가로열
+            arr[q[2]][i] = arr[q[2]][i+1]
+            min_num = min(min_num, arr[q[2]][i])
+        for i in range(q[2],q[0],-1): #우측 세로열
+            arr[i][q[3]] = arr[i-1][q[3]]
+            min_num = min(min_num, arr[i][q[3]])
+        for i in range(q[3],q[1],-1): #상단 가로열
+            arr[q[0]][i] = arr[q[0]][i-1]  
+            min_num = min(min_num, arr[q[0]][i])
+        arr[q[0]][q[1]+1] = temp
+        result.append(min_num)
+    return result
