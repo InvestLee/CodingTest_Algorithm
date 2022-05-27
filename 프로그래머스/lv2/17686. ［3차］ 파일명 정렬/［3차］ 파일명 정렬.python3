@@ -1,0 +1,6 @@
+import re
+
+def solution(files):
+    files = [re.split(r'([0-9]+)',f) for f in files]
+    files.sort(key=lambda x:(x[0].upper(),int(x[1])))
+    return [''.join(f) for f in files]
