@@ -1,0 +1,31 @@
+import heapq
+
+def solution(n, edge):
+    INF = int(1e9)
+    Distance = [0] * (n+1)
+    graph = [[] for _ in range(n+1)]
+    Distance = [0]+[INF]*n
+    for i in edge:
+        graph[i[0]].append((i[1],1))
+        graph[i[1]].append((i[0],1))
+    
+    q = []
+    heapq.heappush(q,(1,0))
+    Distance[1] = 0
+    while q:
+        now, dist = heapq.heappop(q)
+        if Distance[now] < dist:
+            continue
+        for i in graph[now]:
+            cost = dist + i[1]
+            if Distance[i[0]] > cost:
+                Distance[i[0]] = cost
+                heapq.heappush(q,(i[0],cost))
+    
+    best_far = max(Distance)
+    result = 0
+    for i in Distance:
+        if i == best_far:
+            result += 1
+    
+    return result
