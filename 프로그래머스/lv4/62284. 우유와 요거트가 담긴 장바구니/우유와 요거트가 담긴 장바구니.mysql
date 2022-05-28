@@ -1,4 +1,3 @@
-select cart_id from cart_products
-where name in ("Milk","Yogurt")
-group by cart_id
-having count(distinct name) > 1
+select distinct a.cart_id from cart_products a 
+inner join cart_products b on (a.cart_id = b.cart_id) 
+where (a.name = "Milk" and b.name = "Yogurt") or (b.name = "Milk" and a.name = "Yogurt")
