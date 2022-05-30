@@ -1,10 +1,10 @@
-WITH RECURSIVE TEMP_TABLE AS(
-    SELECT 0 AS HOUR
-    UNION ALL
-    SELECT HOUR+1 FROM TEMP_TABLE WHERE HOUR < 23
+with recursive temp as(
+    select 0 as a
+    union all
+    select a+1 from temp where a < 23
 )
 
-SELECT HOUR, COUNT(ANIMAL_ID) FROM TEMP_TABLE
-    LEFT OUTER JOIN ANIMAL_OUTS ON HOUR(DATETIME) = TEMP_TABLE.HOUR
-GROUP BY HOUR
-ORDER BY HOUR ASC
+SELECT a as Hour, COUNT(ANIMAL_ID) FROM temp
+left outer join ANIMAL_OUTS on (temp.a=Hour(ANIMAL_OUTS.datetime))
+GROUP BY Hour
+ORDER BY Hour ASC
