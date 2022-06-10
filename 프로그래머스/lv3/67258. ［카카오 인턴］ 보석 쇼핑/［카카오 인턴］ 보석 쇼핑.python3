@@ -1,0 +1,31 @@
+#빠른 색인을 위한 딕셔너리(해쉬맵) 활용, 키 : 보석 / 값 : 갯수
+#투포인터 활용 end값을 증가시키면서 모든 보석 종류 추가될때 까지 보석 갯수 증가
+#모든 보석이 1개씩 있으면 start값을 증가시키면서 보석 종류 중 하나가 0이 될떄 까지 보석 갯수 감소
+#위 과정을 반복하면서 가장 짧은 구간을 찾는다.
+
+def solution(gems):
+    gems_kind = len(set(gems)) #보석 종류 갯수
+    shortest = len(gems)-1 #짧은 구간 초기값
+    dict = {}
+    start, end = 0, 0
+    result = [1, len(gems)] #구간
+    while end < len(gems):
+        if gems[end] not in dict:
+            dict[gems[end]] = 1 #존재하지 않으면 보석 1개 입력
+        else:
+            dict[gems[end]] += 1 #존재하면 보석 추가
+        end += 1 #다음 포인트
+        
+        if len(dict) == gems_kind: #모든 보석 종류가 들어옴
+            while start < end: #start = end이면 굳이 할 필요 없음
+                if dict[gems[start]] > 1: #해당 보석의 갯수가 2개 이상이면
+                    dict[gems[start]] -= 1 #구간에서 제외시키므로 보석 갯수 감소
+                    start += 1 #구간 축소
+                elif shortest > end-start: #구간 길이 비교
+                    shortest = end-start
+                    result[0], result[1] = start+1, end
+                    break
+                else: #보석의 갯수가 2개 이상도 아니고 구간도 딱히 특이점이 없으면 멈추고 end 조건 맞추기
+                    break
+            
+    return result
