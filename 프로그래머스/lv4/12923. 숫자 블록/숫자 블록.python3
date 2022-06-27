@@ -1,0 +1,13 @@
+#소수는 1이고 소수가 아니면 그 값의 약수 중 가장 작은 값으로 나눈 값
+
+def solution(begin, end):
+    answer = []
+    for i in range(begin,end+1):
+        k = int(i != 1) #1은 0으로 고정이므로 i=1이면 0, i<>1이면 1 대립
+        for j in range(2,int(i**(1/2))+1): #에라토스테네스의 채 응용
+            if i%j == 0 and i//j <= 10000000: #블록번호 제한 및 소수가 아닐 경우
+                k = i//j
+                break
+        answer.append(k)
+                
+    return answer
