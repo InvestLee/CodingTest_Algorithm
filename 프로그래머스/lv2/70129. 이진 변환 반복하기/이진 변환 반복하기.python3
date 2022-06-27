@@ -1,0 +1,9 @@
+def solution(s):
+    exe_cnt = 0
+    del_cnt = 0
+    while s != "1":
+        temp = "".join(s.split("0"))
+        exe_cnt += 1
+        del_cnt += (len(s)-len(temp))
+        s = str(format(len(temp), 'b'))
+    return [exe_cnt, del_cnt]
