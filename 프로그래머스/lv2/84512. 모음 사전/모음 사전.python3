@@ -1,0 +1,23 @@
+def solution(word):
+    #알파벳 순서 정의
+    word_arr = ['A','E','I','O','U']
+    word_input = []
+    #검색 시간을 줄이기 위해 딕셔너리와 전역변수 사용
+    dict = {}
+    global count
+    count = 1
+    
+    def backtracking():
+        global count
+        #워드의 길이는 5를 넘지 못한다.
+        if len(word_input) == 5:
+            return
+        for i in range(5):
+            word_input.append(word_arr[i])
+            dict["".join(word_input)] = count
+            count += 1
+            backtracking()
+            word_input.pop()
+    backtracking()
+    
+    return dict[word]
