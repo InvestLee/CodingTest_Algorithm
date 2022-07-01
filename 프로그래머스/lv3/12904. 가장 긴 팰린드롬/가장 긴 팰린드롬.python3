@@ -1,0 +1,8 @@
+def solution(s):
+    answer = 0 #가장 긴 팰린드롬 수 초기값
+    for i in range(len(s)): #문자열 시작점
+        for j in range(i+1,len(s)+1): #문자열 끝점 (s[i:i+n]은 i~i+n-1에 해당하는 문자)
+            if s[i:j] == s[i:j][::-1]:
+                answer = max(answer, len(s[i:j]))
+
+    return answer
