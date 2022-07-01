@@ -1,0 +1,25 @@
+#BFS를 사용한 이유 : 리스트 내의 모든 문자를 고려해야하고 문자가 순차적으로 변환과정이 이루어지며 변환 횟수를 카운팅하기 때문
+
+from collections import deque
+
+def solution(begin, target, words):
+    answer = 0 #target에 도달할 때 변경횟수
+    queue = deque()
+    queue.append((begin,0))
+    visited = [False] * len(words) #무한 루프 방지를 위한 방문 처리(순환 방지)
+    while queue:
+        w, count = queue.popleft()
+        if w == target:
+            answer = count
+            break
+        for i in range(len(words)):
+            if not visited[i]:
+                equal_count = 0 #현재 단어와 리스트 내 선택된 단어에서 알파벳이 다른 갯수를 저장
+                for j in range(len(w)):
+                    if words[i][j] != w[j]:
+                        equal_count += 1
+                if equal_count == 1:
+                    queue.append((words[i],count+1))
+                    visited[i] = True
+    
+    return answer
