@@ -2,7 +2,7 @@ import sys
 from collections import deque
 
 N, M = map(int, sys.stdin.readline().split())
-graph = [list(map(int,input())) for _ in range(N)]
+graph = [list(map(int,sys.stdin.readline().rstrip())) for _ in range(N)]
 visited = [[[0,0] for _ in range(M)] for _ in range(N)] #[벽을 뚫기 전,벽을 뚫은 경우]
 visited[0][0][0] = 1 #시작하는 칸 포함하여 카운트
 dx = [-1,1,0,0]
