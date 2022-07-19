@@ -10,11 +10,11 @@ def backtracking(num, idx):
     if num == N//2: #절반으로 나누어 지면 인원 배정이 끝났으므로 능력치를 구함.
         start_ability, link_ability = 0, 0
         for i in range(N):
-            for j in range(N):
+            for j in range(i,N):
                 if visited[i] and visited[j]:
-                    start_ability += S[i][j]
+                    start_ability += (S[i][j]+S[j][i])
                 elif not visited[i] and not visited[j]:
-                    link_ability += S[i][j]
+                    link_ability += (S[i][j]+S[j][i])
         min_result = min(min_result,abs(start_ability-link_ability))
         return
     for i in range(idx, N): #모든 경우의 수를 위한 백트래킹(N과 M 문제 참고)
