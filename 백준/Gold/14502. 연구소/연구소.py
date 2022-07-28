@@ -44,16 +44,17 @@ def bfs():
     max_safety = max(max_safety,N*M-count-wall_count)
 
 #벽 3개 세우고 bfs돌리기
-def wall(cnt):
+def wall(start,cnt):
     if cnt == 3:
         bfs()
         return
-    for i in range(N):
-        for j in range(M):
-            if graph[i][j] == 0:
-                graph[i][j] = 1
-                wall(cnt+1)
-                graph[i][j] = 0
+    for i in range(start,N*M):
+        wx = i // M
+        wy = i % M
+        if graph[wx][wy] == 0:
+            graph[wx][wy] = 1
+            wall(i,cnt+1)
+            graph[wx][wy] = 0
 
-wall(0)
+wall(0,0)
 print(max_safety)
