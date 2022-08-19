@@ -12,22 +12,19 @@ copy_A = deepcopy(A)
 
 #배열 회전 함수
 def rotate_method(r,c,s):
-    temp = deepcopy(copy_A)
-    for i in range(r-s,r+s+1):
-        for j in range(c-s,c+s+1):
-            #우측 이동
-            if i < r and i-r < j-c and i+j <= r+c:
-                temp[i][j] = copy_A[i][j-1]
-            #좌측 이동
-            elif i > r and i-r > j-c and i+j >= r+c:
-                temp[i][j] = copy_A[i][j+1]
-            #상측 이동
-            elif j < c and i-r >= j-c and i+j < r+c:
-                temp[i][j] = copy_A[i+1][j]
-            #하측 이동
-            elif j > c and i-r <= j-c and i+j > r+c:
-                temp[i][j] = copy_A[i-1][j]
-    return temp
+    for i in range(s,0,-1):
+        temp_value = copy_A[r-i][c+i]
+        #우측 이동
+        copy_A[r-i][c-i+1:c+i+1] = copy_A[r-i][c-i:c+i]
+        #상측 이동
+        for row in range(r-i, r+i):
+            copy_A[row][c-i] = copy_A[row+1][c-i]
+        #좌측 이동
+        copy_A[r+i][c-i:c+i] = copy_A[r+i][c-i+1:c+i+1]
+        #하측 이동
+        for row in range(r+i, r-i,-1):
+            copy_A[row][c+i] = copy_A[row-1][c+i]
+        copy_A[r-i+1][c+i] = temp_value
 
 #행의 최소값 산출 함수
 def min_sum(copy_A):
@@ -46,6 +43,6 @@ for b in back_list:
     copy_A = deepcopy(A)
     for order in b:
         r, c, s = rotate_A[order]
-        copy_A = deepcopy(rotate_method(r,c,s))
+        rotate_method(r,c,s)
     result = min(result,min_sum(copy_A))
 print(result)
