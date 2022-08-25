@@ -1,0 +1,16 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int M = -1;
+        int F = -1;
+        while (true){
+            M = sc.nextInt();
+            F = sc.nextInt();
+            if (M == 0 && F ==0) break;
+            System.out.println(M+F);
+        }
+        sc.close();
+    }
+}
