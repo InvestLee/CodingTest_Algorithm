@@ -1,3 +1,25 @@
+def solution(n, s, a, b, fares):
+    #플로이드 워셜 알고리즘 그래프
+    graph = [[int(1e9)]*n for _ in range(n)]
+    for i in range(n):
+        graph[i][i] = 0
+    for i,j,k in fares:
+        graph[i-1][j-1] = k
+        graph[j-1][i-1] = k    
+    for k in range(n):
+        for i in range(n):
+            for j in range(n):
+                if graph[i][j] > graph[i][k]+graph[k][j]:
+                    graph[i][j] = graph[i][k]+graph[k][j]
+    
+    #각 경유지의 합승거리+a거리+b거리 최솟값 리턴
+    result = int(1e9)
+    for i in range(n):
+        result = min(result,graph[s-1][i]+graph[i][a-1]+graph[i][b-1])
+    
+    return result
+
+'''
 import heapq
 
 def solution(n, s, a, b, fares):
@@ -30,3 +52,4 @@ def solution(n, s, a, b, fares):
         result.append(dijkstra(s)[i]+dijkstra(i)[a]+dijkstra(i)[b])
     
     return min(result)
+'''
