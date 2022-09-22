@@ -2,9 +2,9 @@ def solution(key, lock):
     #자물쇠 영역을 벗어나도 되도록 자물쇠 크기를 가로 세로 3배씩 커지게 하여 중앙 배치한다.
     global lock_length
     lock_length = len(lock)
-    lock = lock * lock_length
+    lock = lock * 3
     for i in range(len(lock)):
-        lock[i] = lock[i] * lock_length
+        lock[i] = lock[i] * 3
     
     #key 회전 함수
     def rotate(key):
