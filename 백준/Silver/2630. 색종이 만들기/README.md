@@ -1,10 +1,10 @@
-# [Silver III] 색종이 만들기 - 2630 
+# [Silver II] 색종이 만들기 - 2630 
 
 [문제 링크](https://www.acmicpc.net/problem/2630) 
 
 ### 성능 요약
 
-메모리: 30840 KB, 시간: 84 ms
+메모리: 30616 KB, 시간: 52 ms
 
 ### 분류
 
