@@ -1,0 +1,30 @@
+import sys
+from collections import deque
+
+n, m = map(int, sys.stdin.readline().split())
+graph = [[] for _ in range(n+1)]
+indegree = [0] * (n+1)
+
+for _ in range(m):
+    singerOrder = list(map(int, sys.stdin.readline().split()))
+    for i in range(1, singerOrder[0]):
+        graph[singerOrder[i]].append(singerOrder[i+1])
+        indegree[singerOrder[i+1]] += 1
+
+q = deque()
+for i in range(1, n+1):
+    if indegree[i] == 0:
+        q.append(i)
+
+result = []
+while q:
+    node = q.popleft()
+    result.append(node)
+    for g in graph[node]:
+        indegree[g] -= 1
+        if indegree[g] == 0:
+            q.append(g)
+
+if len(result) != n: print(0)
+else: 
+    for r in result: print(r)
