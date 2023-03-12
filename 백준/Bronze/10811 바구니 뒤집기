@@ -1,0 +1,10 @@
+import sys
+
+n, m = map(int, sys.stdin.readline().split())
+
+basket = [k+1 for k in range(n)]
+for k in range(m):
+    i, j = map(int, sys.stdin.readline().split())
+    basket = basket[:i-1]+list(reversed(basket[i-1:j]))+basket[j:]
+
+print(" ".join(map(str, basket)))
