@@ -48,9 +48,14 @@ public class Main {
     public static int union(int a, int b){
         a = find(a);
         b = find(b);
-        if(a != b){
+        if(a < b){
             parent[b] = a;
             friendCnt[a] += friendCnt[b];
+            return friendCnt[a];
+        } else if(a > b) {
+            parent[a] = b;
+            friendCnt[b] += friendCnt[a];
+            return friendCnt[b];
         }
         return friendCnt[a];
     }
