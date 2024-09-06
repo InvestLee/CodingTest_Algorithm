@@ -11,6 +11,7 @@ class Solution {
     public int[] solution(String[] maps) {
         int[] answer = {};
         PriorityQueue<Integer> pq = new PriorityQueue();
+        ArrayList<Integer> arr = new ArrayList();
         xlen = maps.length;
         ylen = maps[0].length();
         
@@ -25,7 +26,7 @@ class Solution {
         for(int i = 0; i < xlen; i++){
             for(int j = 0; j < ylen; j++){
                 if(!visited[i][j] && !map[i][j].equals("X")){
-                    pq.offer(new Integer(bfs(i,j)));
+                    pq.add(bfs(i,j));
                 }
             }
         }
